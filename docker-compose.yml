@@ -1,0 +1,36 @@
+# ==============================================================================
+# Local AI Platform
+#
+# Docker Compose Foundation
+#
+# Purpose:
+# Defines the runtime services that compose the Local AI Platform.
+#
+# Used By:
+# Docker Compose
+#
+# Notes:
+# This file describes the desired runtime state of the platform.
+# ==============================================================================
+
+services:
+   ollama:
+    # Local AI inference runtime.
+    image: ollama/ollama:latest
+
+    restart: unless-stopped
+    
+    ports:
+      - "${OLLAMA_PORT:-11434}:11434"
+    
+    volumes:
+      - ./storage/ollama:/root/.ollama
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities:
+                - gpu
