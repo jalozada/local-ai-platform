@@ -58,8 +58,18 @@ temp/
 *.swp
 *.swo
 
+# -----------------------------------------------------------------------------
 # Platform runtime storage
+# -----------------------------------------------------------------------------
+
+# Ignore everything under storage by default
 storage/*
+
+# Preserve the directory structure
 !storage/.gitkeep
 !storage/ollama/
+!storage/ollama/.gitkeep
+
+# Ignore all Ollama runtime artifacts
+storage/ollama/*
 !storage/ollama/.gitkeep
