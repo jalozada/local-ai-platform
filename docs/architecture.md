@@ -18,7 +18,39 @@ The platform should be maintainable, observable, and adaptable as capabilities a
 
 ## High-Level Vision
 
-Local AI Platform is intended to evolve into a cohesive environment for running and managing AI workloads locally. The platform may include model execution, workflow orchestration, data integration, service coordination, and operational visibility. Each capability should be introduced through a defined architectural role instead of ad hoc expansion.
+The Local AI Platform is designed as a layered system with clear separation of responsibilities. Users interact with the platform through either the CLI or REST API, both of which communicate with a single Ollama runtime. The runtime manages AI models stored on persistent host storage while running inside a Docker Compose environment on an Ubuntu host with NVIDIA GPU acceleration.
+
+```mermaid
+flowchart TD
+
+    U[User]
+
+    CLI[Ollama CLI]
+    API[REST API]
+
+    O[Ollama Runtime]
+
+    S[Persistent Model Storage]
+
+    D[Docker Compose]
+
+    H[Ubuntu 24.04 Host]
+
+    G[NVIDIA RTX A3000]
+
+    U --> CLI
+    U --> API
+
+    CLI --> O
+    API --> O
+
+    O --> S
+    O --> D
+
+    D --> H
+
+    H --> G
+```
 
 ## Current Phase
 
